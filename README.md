@@ -1,8 +1,8 @@
 # Machine-Learning
 Just me learning about stuff
 
-* Finished implementing a linear regression model with no pytorch.
-* Finished implementing a logistic regression model with no pytorch.
+* Finished implementing a linear regression model with no PyTorch.
+* Finished implementing a logistic regression model with no PyTorch.
 
 MNIST
 * Finished using a multi-layer perceptron neural network achieving a maximum accuracy of approx. 98.4
