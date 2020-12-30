@@ -9,14 +9,11 @@
 import torch
 import torchvision
 from torchvision import transforms, datasets
-import matplotlib.pyplot as plt
 from tqdm import trange, tqdm
 import torch.optim as optim
 import torch.nn as nn
 import torch.nn.functional as F
-get_ipython().run_line_magic('matplotlib', 'inline')
 import numpy as np
-np.set_printoptions(suppress=True)
 
 batch_size = 128
 
@@ -27,10 +24,6 @@ test  = datasets.MNIST('../../MNIST_DATA', train=False, download=True,
                       transform=transforms.Compose([transforms.ToTensor()]))
 trainset = torch.utils.data.DataLoader(train, batch_size=batch_size, shuffle=True)
 testset  = torch.utils.data.DataLoader(test,  batch_size=batch_size, shuffle=True)
-
-
-# In[ ]:
-
 
 class Net(nn.Module):
     def __init__(self):
@@ -49,10 +42,6 @@ class Net(nn.Module):
         x = F.relu(self.fc1(x))
         x = self.fc2(x)
         return F.log_softmax(x, dim=1)
-
-
-# In[ ]:
-
 
 def train(model, epochs):
     losses, accuracies = [], []
@@ -73,30 +62,6 @@ def train(model, epochs):
             optimiser.step()
     return losses, accuracies
 
-
-# In[ ]:
-
-
-model = Net().cuda()
-
-
-# In[ ]:
-
-
-l, a = train(model, 10)
-
-
-# In[ ]:
-
-
-plt.ylim(-0.1, 1.1)
-plt.plot(l)
-plt.plot(a)
-
-
-# In[ ]:
-
-
 def test(model):
     losses, accuracies = [], []
     for data in tqdm(testset):
@@ -109,23 +74,3 @@ def test(model):
         losses.append(loss)
         accuracies.append(acc)
     return losses, accuracies
-
-
-# In[ ]:
-
-
-l2, a2 = test(model)
-
-
-# In[ ]:
-
-
-plt.plot(l2)
-plt.plot(a2)
-
-
-# In[ ]:
-
-
-sum(a2)/len(a2)
-
