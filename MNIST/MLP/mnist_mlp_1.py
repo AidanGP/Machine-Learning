@@ -1,9 +1,8 @@
-#!/usr/bin/env python
 # coding: utf-8
 
 # My fist MNIST Classifier, this does not have GPU acceleration
-
 import torch
+import numpy as np
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
@@ -15,11 +14,11 @@ lr = 0.001 # learning rate
 epochs = 3 #number of full iterations through the training set
 
 # data used for training the model
-train = datasets.MNIST('', train=True, download=True,
+train = datasets.MNIST('../../MNIST_DATA', train=True, download=True,
                       transform=transforms.Compose([transforms.ToTensor()]))
 
 # data used for testing the accuracy of the model
-test  = datasets.MNIST('', train=False, download=True,
+test  = datasets.MNIST('../../MNIST_DATA', train=False, download=True,
                       transform=transforms.Compose([transforms.ToTensor()]))
 
 # group the data sets into shuffled batches to improve the validity of the model
@@ -34,7 +33,7 @@ class Net(nn.Module): # inherit the torch.nn.Model methods
         self.l2 = nn.Linear(128, 64) # the linear layers manage the weights and biases
         self.l3 = nn.Linear(64, 64) # 4 laters with 784 inputs and 10 outputs.
         self.l4 = nn.Linear(64, 10) # 10 outputs corresponding to 10 digits
-        
+
     def forward(self, x): # feed forward pass
         x = F.relu(self.l1(x)) # relu is rectified linear function
         x = F.relu(self.l2(x)) # relu is max(0, x)

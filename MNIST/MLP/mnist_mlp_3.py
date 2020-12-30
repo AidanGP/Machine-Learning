@@ -17,10 +17,10 @@ import numpy as np
 
 batch_size = 128
 
-train = datasets.MNIST('', train=True, download=True,
+train = datasets.MNIST('../../MNIST_DATA', train=True, download=True,
                       transform=transforms.Compose([transforms.ToTensor()]))
 
-test  = datasets.MNIST('', train=False, download=True,
+test  = datasets.MNIST('../../MNIST_DATA', train=False, download=True,
                       transform=transforms.Compose([transforms.ToTensor()]))
 trainset = torch.utils.data.DataLoader(train, batch_size=batch_size, shuffle=True)
 testset  = torch.utils.data.DataLoader(test,  batch_size=batch_size, shuffle=True)
