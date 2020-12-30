@@ -3,20 +3,14 @@
 
 # MNIST Classifier with GPU acceleration.
 
-# In[ ]:
-
-
 import torch
 import torchvision
 from torchvision import transforms, datasets
-import matplotlib.pyplot as plt
 from tqdm import trange, tqdm
 import torch.optim as optim
 import torch.nn as nn
 import torch.nn.functional as F
-get_ipython().run_line_magic('matplotlib', 'inline')
 import numpy as np
-np.set_printoptions(suppress=True)
 
 batch_size = 128
 
@@ -27,10 +21,6 @@ test  = datasets.MNIST('', train=False, download=True,
                       transform=transforms.Compose([transforms.ToTensor()]))
 trainset = torch.utils.data.DataLoader(train, batch_size=batch_size, shuffle=True)
 testset  = torch.utils.data.DataLoader(test,  batch_size=batch_size, shuffle=True)
-
-
-# In[ ]:
-
 
 class Net(nn.Module):
     def __init__(self):
@@ -44,10 +34,6 @@ class Net(nn.Module):
         x = F.relu(self.fc2(x))
         x = self.fc3(x)
         return F.log_softmax(x, dim=1)
-
-
-# In[ ]:
-
 
 def train(model, epochs):
     accuracies, losses = [], []
@@ -67,31 +53,6 @@ def train(model, epochs):
             optimiser.step()
     return losses, accuracies
 
-
-# In[ ]:
-
-
-model = Net().cuda()
-losses, accuracies = train(model, 50)
-
-
-# In[ ]:
-
-
-plt.ylim(-0.1, 1.1)
-plt.plot(losses)
-plt.plot(accuracies)
-
-
-# In[ ]:
-
-
-print(f'Loss :: {losses[-1]} Accuracy :: {accuracies[-1]}')
-
-
-# In[ ]:
-
-
 def test(model):
     losses, accuracies = [], []
     for data in tqdm(testset):
@@ -105,22 +66,4 @@ def test(model):
         accuracies.append(acc)
     return losses, accuracies
 
-
-# In[ ]:
-
-
-loss, acc = test(model)
-
-
-# In[ ]:
-
-
-plt.plot(loss)
-plt.plot(acc)
-
-
-# In[ ]:
-
-
-print(f'Loss :: {sum(loss)/len(loss)} Accuracy :: {sum(acc)/len(acc)}')
 

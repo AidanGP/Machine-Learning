@@ -3,29 +3,16 @@
 
 # My fist MNIST Classifier, this does not have GPU acceleration
 
-# In[ ]:
-
-
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
 import torchvision
 from torchvision import transforms, datasets
-import matplotlib.pyplot as plt
-get_ipython().run_line_magic('matplotlib', 'inline')
-
-
-# In[ ]:
-
 
 BS = 10 # Batch size
 lr = 0.001 # learning rate
 epochs = 3 #number of full iterations through the training set
-
-
-# In[ ]:
-
 
 # data used for training the model
 train = datasets.MNIST('', train=True, download=True,
@@ -38,10 +25,6 @@ test  = datasets.MNIST('', train=False, download=True,
 # group the data sets into shuffled batches to improve the validity of the model
 trainset = torch.utils.data.DataLoader(train, batch_size=BS, shuffle=True)
 testset  = torch.utils.data.DataLoader(test,  batch_size=BS, shuffle=True)
-
-
-# In[ ]:
-
 
 # neural network class
 class Net(nn.Module): # inherit the torch.nn.Model methods
@@ -60,35 +43,26 @@ class Net(nn.Module): # inherit the torch.nn.Model methods
         # log softmax returns an array of confidence scores for each digit
         return F.log_softmax(x, dim=1)
 
-net = Net()
+def train(model, epochs):
+    optimiser = optim.Adam(model.parameters(), lr=lr) # start an optimiser using the Adam algorithm
+    for epoch in range(epochs): # iterate through the training set epoch times.
+        for data in trainset:   # iterate through the images in the training set
+            X, y = data         # set x and y equal to the image and the label respectively
+            model.zero_grad() # reset the derivitives to zero
+            out = model(X.view(-1, 784)) # pass an image through the network
+            loss = F.nll_loss(out, y) # calculate the loss / error / cost
+            loss.backward() # calculate the derivitive of the loss function
+            optimiser.step() # increment the weights and biases
+        return loss
 
-
-# In[ ]:
-
-
-optimiser = optim.Adam(net.parameters(), lr=lr) # start an optimiser using the Adam algorithm
-for epoch in range(epochs): # iterate through the training set epoch times.
-    for data in trainset:   # iterate through the images in the training set
-        X, y = data         # set x and y equal to the image and the label respectively
-        net.zero_grad() # reset the derivitives to zero
-        out = net(X.view(-1, 784)) # pass an image through the network
-        loss = F.nll_loss(out, y) # calculate the loss / error / cost
-        loss.backward() # calculate the derivitive of the loss function
-        optimiser.step() # increment the weights and biases
-    print(loss)
-
-
-# In[ ]:
-
-
-total, correct = 0, 0
-# we want to iterate through the test set without computing gradients because we arent learning from this
-with torch.no_grad():
-    for data in testset: # iterate through the images
-        X, y = data # assign x and y to the image and the label respectively
-        out = net(X.view(-1, 784)) # pass image to network
-        for ind, i in enumerate(out): #check if the returned value from the network matches the label
-            correct += (torch.argmax(i) == y[ind]).float() #increment the counters
-            total   += 1
-print('Acc : ', '%.2f'%(correct/total)) # compute accuracy
-
+def test(model):
+    total, correct = 0, 0
+    # we want to iterate through the test set without computing gradients because we arent learning from this
+    with torch.no_grad():
+        for data in testset: # iterate through the images
+            X, y = data # assign x and y to the image and the label respectively
+            out = model(X.view(-1, 784)) # pass image to network
+            for ind, i in enumerate(out): #check if the returned value from the network matches the label
+                correct += (torch.argmax(i) == y[ind]).float() #increment the counters
+                total   += 1
+    return correct/total
