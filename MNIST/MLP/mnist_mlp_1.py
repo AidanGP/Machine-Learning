@@ -14,11 +14,11 @@ lr = 0.001 # learning rate
 epochs = 3 #number of full iterations through the training set
 
 # data used for training the model
-train = datasets.MNIST('../../MNIST_DATA', train=True, download=True,
+train = datasets.MNIST('../MNIST_DATA', train=True, download=True,
                       transform=transforms.Compose([transforms.ToTensor()]))
 
 # data used for testing the accuracy of the model
-test  = datasets.MNIST('../../MNIST_DATA', train=False, download=True,
+test  = datasets.MNIST('../MNIST_DATA', train=False, download=True,
                       transform=transforms.Compose([transforms.ToTensor()]))
 
 # group the data sets into shuffled batches to improve the validity of the model
