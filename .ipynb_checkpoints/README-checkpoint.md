@@ -12,4 +12,4 @@ Cats vs. Dogs Dataset.
 * Done using a Convolutional Neural Network, needs more work/tuning.
 
 CIFAR-10.
-* Is on the todo list.
+* Done using a CNN, almost at 90% accuracy.
