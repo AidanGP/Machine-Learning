@@ -25,5 +25,7 @@ Repository dedicated to machine learning.
 After practicing the basics of Neural Networks through the previous datasets, I wanted to be able to apply machine learning to something more visual like a game, this lead me to Q learning.
 
 ## Q Learning
+###### Q Learning seemed cool but at the same time pretty limited. I didn't do any really cool projects on this but I looked at some sample code for Open AI Gym's MountainCar-v0 game.
 
 ## Deep Q Learning
+###### Deep Q Learning seems like a much more powerful tool that Q Learning. My main goal for learning this is to have a piece of software that can perform well and learn to play a multitude of Open AI Gym's Games.
