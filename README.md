@@ -1,7 +1,10 @@
 # Machine-Learning
-Just me learning about stuff
+Repository dedicated to machine learning.
 
+## Basics
+###### I wanted to test my understanding of some basic machine learning concepts so I implemented the following with no Machine Learning Libraries.
 * Finished implementing a linear regression model with no PyTorch.
+
 * Finished implementing a logistic regression model with no PyTorch.
 
 MNIST
