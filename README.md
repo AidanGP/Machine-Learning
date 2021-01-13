@@ -1,7 +1,7 @@
 # Machine Learning
 Repository dedicated to machine learning. I will be using PyTorch for this but will learn TensorFlow and Keras once I feel comfortable with torch.
 
-To Install Pytorch with Conda and pip respectively.
+## Installing Pytorch with Conda or pip:
 ```bash
 conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
 
