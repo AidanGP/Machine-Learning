@@ -9,7 +9,7 @@ pip install torch===1.7.1 torchvision===0.8.2 torchaudio===0.7.2 -f https://down
 ```
 
 ## Basics
-###### I wanted to test my understanding of some basic machine learning concepts so I implemented the following with no Machine Learning Libraries.
+###### I wanted to test my understanding of some basic machine learning concepts so I implemented the following with no PyTorch.
 * A linear regression model.
 
 * A logistic regression model.
