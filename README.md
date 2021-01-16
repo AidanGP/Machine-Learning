@@ -1,13 +1,6 @@
 # Machine Learning
 Repository dedicated to machine learning. I will be using PyTorch for this but will learn TensorFlow and Keras once I feel comfortable with torch.
 
-## Installing Pytorch with Conda or pip
-```bash
-conda install pytorch torchvision torchaudio cudatoolkit=10.2 -c pytorch
-
-pip install torch===1.7.1 torchvision===0.8.2 torchaudio===0.7.2 -f https://download.pytorch.org/whl/torch_stable.html
-```
-
 ## Basics
 ###### I wanted to test my understanding of some basic machine learning concepts so I implemented the following with no PyTorch.
 * A linear regression model.
